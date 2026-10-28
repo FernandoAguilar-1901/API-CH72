@@ -10,7 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path="/ecommerce/productos/")
 public class ProductoController {
-    
+
     private final ProductoService service;
 
     @Autowired // Gestiona la inyección de dependencias de forma automática
