@@ -2,6 +2,7 @@ package com.generation.ecommerce.models;
 
 // POJO - Plain Old Java Object
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +11,7 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, unique = true)
+    @Column(name = "productoId", nullable = false, unique = true)
     private Integer id;
 
     @Column(name = "nombre", nullable = false)
@@ -27,6 +28,11 @@ public class Producto {
 
     @Column(name = "existencias", nullable = false)
     private Integer existencias;
+
+    @JsonIgnoreProperties("productos")
+    @ManyToOne
+    @JoinColumn(name="id")
+    private Categoria categoria;
 
     public Producto(String nombre, String descripcion, String imagen, Double precio, Integer existencias) {
         this.nombre = nombre.toUpperCase();
@@ -81,6 +87,14 @@ public class Producto {
     public void setExistencias(Integer existencias) {
         this.existencias = (existencias < 0) ? 1 : existencias;
     }// setExistencias
+
+    public Categoria getCategoria() {
+        return categoria;
+    }// getCategoria
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }// setCategoria
 
     @Override
     public String toString() {

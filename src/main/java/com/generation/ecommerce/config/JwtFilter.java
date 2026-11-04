@@ -111,7 +111,9 @@ public class JwtFilter extends GenericFilterBean {
 
         } catch (SignatureException | MalformedJwtException | ExpiredJwtException e){
 
-            throw new ServletException("2. Token inválido. Verifica que contenga la firma correcta, que no haya sido manipulado o que no esté expirado.");
+            throw new ServletException(
+                    "2. Token inválido. Verifica que contenga la firma correcta, " +
+                            "que no haya sido manipulado o que no esté expirado.");
 
         }// catch
 

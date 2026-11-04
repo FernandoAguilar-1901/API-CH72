@@ -39,13 +39,8 @@ public class ProductoController {
     }// addProducto
 
     @PutMapping("{id}")
-    public Producto updateProducto(@PathVariable Integer id,
-                                   @RequestParam(required = false) String nombre,
-                                   @RequestParam(required = false) String descripcion,
-                                   @RequestParam(required = false) String imagen,
-                                   @RequestParam(required = false) Double precio,
-                                   @RequestParam(required = false) Integer existencias){ // Solicita los datos que actualizaremos en la URL de la solicitud
-        return service.updateProducto(id, nombre, descripcion, imagen, precio, existencias);
+    public Producto updateProducto(@PathVariable Integer id, @RequestBody Producto producto){ // Solicita los datos que actualizaremos en la URL de la solicitud
+        return service.updateProducto(id, producto);
     }// updateProducto
 
 

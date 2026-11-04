@@ -1,6 +1,8 @@
 package com.generation.ecommerce.services;
 
+import com.generation.ecommerce.models.Categoria;
 import com.generation.ecommerce.models.Producto;
+import com.generation.ecommerce.repositories.CategoriaRepository;
 import com.generation.ecommerce.repositories.ProductoRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,11 @@ import java.util.List;
 public class ProductoService {
 
     private final ProductoRepository repository;
+    private final CategoriaRepository categoriaRepository;
 
-    public ProductoService(ProductoRepository repository){
+    public ProductoService(ProductoRepository repository, CategoriaRepository categoriaRepository){
         this.repository = repository;
+        this.categoriaRepository = categoriaRepository;
     }// constructor
 
     public List<Producto> getProductos() {
@@ -39,27 +43,38 @@ public class ProductoService {
 
     public Producto addProducto(Producto producto) {
 
-        if(!producto.getNombre().isBlank() && !producto.getDescripcion().isBlank() && producto.getNombre() != null && producto.getDescripcion() != null){
+        if(!producto.getNombre().isBlank() && !producto.getDescripcion().isBlank() &&
+                producto.getNombre() != null && producto.getDescripcion() != null &&
+                producto.getCategoria() != null && producto.getCategoria().getId() != null){
+            Integer categoriaId = producto.getCategoria().getId();
+            Categoria categoria = categoriaRepository.findById(categoriaId).get();
+            producto.setCategoria(categoria);
             repository.save(producto);
         }// if
 
         return producto;
     }// addProducto
 
-    public Producto updateProducto(Integer id, String nombre, String descripcion, String imagen, Double precio, Integer existencias) {
-        Producto producto = null;
+    public Producto updateProducto(Integer id, Producto producto) {
+        Producto prod = null;
 
         if( repository.existsById(id) ){
             Producto p = repository.findById(id).get();
 
-            if(nombre != null && !nombre.isBlank()) p.setNombre(nombre);
-            if(descripcion != null && !descripcion.isBlank()) p.setDescripcion(descripcion);
-            if(imagen != null && !imagen.isBlank()) p.setImagen(imagen);
-            if(precio != null) p.setPrecio(precio);
-            if(existencias != null) p.setExistencias(existencias);
+            if(producto.getNombre() != null && !producto.getNombre().isBlank()) p.setNombre(producto.getNombre());
+            if(producto.getDescripcion() != null && !producto.getDescripcion().isBlank()) p.setDescripcion(producto.getDescripcion());
+            if(producto.getImagen() != null && !producto.getImagen().isBlank()) p.setImagen(producto.getImagen());
+            if(producto.getPrecio() != null) p.setPrecio(producto.getPrecio());
+            if(producto.getExistencias() != null) p.setExistencias(producto.getExistencias());
+            if(producto.getCategoria() != null && producto.getCategoria().getId() != null){
+                if(categoriaRepository.existsById(producto.getCategoria().getId())){
+                    Categoria categoria = categoriaRepository.findById(producto.getCategoria().getId()).get();
+                    p.setCategoria(categoria);
+                }// if categoria exists
+            }// if categoria not null
 
-            producto = p;
-            repository.save(producto);
+            prod = p;
+            repository.save(prod);
 
         }// if
 
