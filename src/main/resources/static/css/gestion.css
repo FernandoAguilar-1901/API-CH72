@@ -1,0 +1,173 @@
+/* ==========================================
+   ENCABEZADO
+   ========================================== */
+main h1 {
+    font-size: 2.1rem;
+}
+
+main h2.h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--color-border);
+}
+
+main h3.h5 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-accent-dark);
+}
+
+/* ==========================================
+   TABS
+   ========================================== */
+#gestionTabs {
+    border-bottom: 1px solid var(--color-border);
+    gap: 0.25rem;
+}
+
+#gestionTabs .nav-link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    padding: 0.75rem 1.5rem;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+#gestionTabs .nav-link:hover {
+    color: var(--color-ink);
+    border-color: var(--color-border);
+    background-color: transparent;
+}
+
+#gestionTabs .nav-link.active {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-color: transparent;
+}
+
+#gestionTabsContent {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border) !important;
+    border-top: none !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================
+   FORMULARIOS DE CREACIÓN
+   ========================================== */
+#productoCreateForm,
+#categoriaCreateForm {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+/* ==========================================
+   SEPARADOR ENTRE CREAR Y GESTIONAR
+   ========================================== */
+main hr {
+    border: none;
+    height: 1px;
+    background-color: var(--color-border);
+    margin: 2.5rem 0;
+}
+
+/* ==========================================
+   TABLAS DE GESTIÓN
+   ========================================== */
+#productosManageTableBody td:first-child,
+#categoriasManageTableBody td:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+#productosManageTableBody td:nth-child(3) {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    color: var(--color-primary-dark);
+}
+
+#categoriasManageTableBody td:nth-child(4) {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+}
+
+/* Botones de acción dentro de la tabla, siempre juntos y compactos */
+.btn-edit-producto,
+.btn-edit-categoria {
+    margin-right: 0.4rem;
+}
+
+/* Botón deshabilitado (categoría con productos asociados) */
+.btn-delete-categoria:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   FORMULARIOS DE EDICIÓN (paneles destacados)
+   ========================================== */
+#productoEditFormContainer,
+#categoriaEditFormContainer {
+    background-color: var(--color-primary-light);
+    border: 1.5px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    margin-top: 1.5rem;
+    animation: slideIn var(--transition-base);
+}
+
+#productoEditFormContainer h3,
+#categoriaEditFormContainer h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#productoEditFormContainer h3::before,
+#categoriaEditFormContainer h3::before {
+    content: '✎';
+    color: var(--color-primary);
+}
+
+#productoEditForm .form-control,
+#productoEditForm .form-select,
+#categoriaEditForm .form-control {
+    background-color: var(--color-surface);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 767px) {
+    #gestionTabs .nav-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    #gestionTabsContent {
+        padding: 1.5rem 1rem !important;
+    }
+
+    .table-responsive-wrapper {
+        overflow-x: auto;
+    }
+}

@@ -5,10 +5,7 @@ import com.generation.ecommerce.dtos.TokenJwt;
 import com.generation.ecommerce.services.JwtService;
 import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/ecommerce/login")
